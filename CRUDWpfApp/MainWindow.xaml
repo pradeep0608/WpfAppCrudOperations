@@ -1,0 +1,19 @@
+﻿<Window x:Class="CRUDWpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CRUDWpfApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <DockPanel Margin="10">
+            <StackPanel DockPanel.Dock="Right" Margin="10,0,0,0">
+                <Button Name="btnAddUser" Command= "{Binding AddEmployeeCommand}"> Add Employee</Button>
+                <Button Name="btnChangeUser" Command= "{Binding UpdateEmployeeCommand}" Margin="0,5">Update Employee</Button>
+                <Button Name="btnDeleteUser" Command= "{Binding DeleteEmployeeCommand}">Delete Employee</Button>
+            </StackPanel>
+            <ListBox ItemsSource="{Binding EmployessCollection}" SelectedItem="{Binding SelectedEmployee}" DisplayMemberPath="EmployeeName"></ListBox>
+        </DockPanel>
+    </Grid>
+</Window>
