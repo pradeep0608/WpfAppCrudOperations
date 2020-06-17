@@ -74,15 +74,26 @@ namespace CRUDWpfApp
         private void AddEmployeeToCollection(object employee)
         {
             ModelEmployee model = employee as ModelEmployee;
-            this.EmployessCollection.Add(new ModelEmployee() { EmployeeName = " New Employee" , EmployeeAddress = "New Employee Address", EmployeeId = "New Employee Number" });
+            string employeeCountString = (this.EmployessCollection.Count+1).ToString();
+            this.EmployessCollection.Add(new ModelEmployee() { EmployeeName = " New Employee" + employeeCountString, EmployeeAddress = "New Employee Address"+ employeeCountString, EmployeeId = "New Employee Number" + employeeCountString });
         }
 
         private void UpdateEmployeeToCollection(object employee)
         {
-            this.SelectedEmployee.EmployeeName = "Updated Name";
-            this.SelectedEmployee.EmployeeAddress = "Updated Addreess";
-            this.SelectedEmployee.EmployeeId = "Updated Id";
-            this.RaisePropertyChanged("EmployessCollection");
+            if (this.SelectedEmployee != null)
+            {
+                foreach (var model in this.m_modelEmployees)
+                {
+                    if (model.EmployeeName == this.SelectedEmployee.EmployeeName)
+                    {
+                        model.EmployeeName = "Updated Name" + (this.EmployessCollection.Count + 1).ToString(); 
+                        model.EmployeeAddress = "Updated Addreess" + (this.EmployessCollection.Count + 1).ToString();
+                        model.EmployeeId = "Updated Id" + (this.EmployessCollection.Count + 1).ToString();
+                        break;
+                    }
+                }
+                this.RaisePropertyChanged("EmployessCollection");
+            }
         }
 
         private void DeleteEmployeeInCollection(object employee)
